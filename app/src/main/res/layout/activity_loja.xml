@@ -4,18 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".views.AtividadeLoja"
-    android:gravity="center">
+    tools:context=".views.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/token"
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="TOKEN"
-        android:textSize="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:background="@color/colorPrimary"
+        app:tabTextColor="#fff"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorAccent"
 
+        android:id="@+id/id_tablayot">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager_id"></android.support.v4.view.ViewPager>
 </LinearLayout>

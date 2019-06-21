@@ -19,6 +19,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pi.model.Cliente;
+import com.example.pi.model.Session;
 import com.example.pi.views.AtividadeLoja;
 
 import org.json.JSONException;
@@ -47,6 +48,9 @@ public class Api_manipulation_authentication {
                 @Override
                 public void onResponse(String response) {
                     Log.i("LOG_RESPONSE", response);
+
+                    Session session = new Session(context);
+                    session.setToken(response);
 
                     Intent intent = new Intent(activity.getApplication(), AtividadeLoja.class);
 

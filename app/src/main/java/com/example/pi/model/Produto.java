@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Produto {
     private Long id;
-    private String nome;
+    private String nome,sexo;
     private double custo, preco, qnt;
     private List<Imagem> imagens;
     private List<Categoria> categoria;
@@ -65,5 +65,13 @@ public class Produto {
 
     public void setCategoria(List<Categoria> categoria) {
         this.categoria = categoria;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }
