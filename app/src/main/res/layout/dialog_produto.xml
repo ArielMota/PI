@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#8888"
+    >
+
+
+
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#888"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            >
+
+            <ImageView
+                android:id="@+id/img_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close_red_30dp"
+
+                />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_produto"
+            android:layout_width="match_parent"
+            android:layout_height="358dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/camisa"
+
+            />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome Produto"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:id="@+id/dialog_name_id"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/dialog_preco_id"
+            />
+
+
+
+        <Button
+            android:id="@+id/dialog_btn_carrinho"
+            android:padding="20dp"
+            android:drawablePadding="20dp"
+            android:drawableLeft="@drawable/ic_local_grocery_store_black_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_dark"
+            android:text="Adcionar no carrinho"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="bottom"
+            android:textColor="#fff"
+
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

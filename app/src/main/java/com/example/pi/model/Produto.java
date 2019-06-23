@@ -5,9 +5,10 @@ import java.util.List;
 public class Produto {
     private Long id;
     private String nome,sexo;
-    private double custo, preco, qnt;
+    private double custo, preco;
     private List<Imagem> imagens;
     private List<Categoria> categoria;
+    int qnt;
 
 
     public Long getId() {
@@ -43,11 +44,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public double getQnt() {
+    public int getQnt() {
         return qnt;
     }
 
-    public void setQnt(double qnt) {
+    public void setQnt(int qnt) {
         this.qnt = qnt;
     }
 

@@ -48,7 +48,7 @@ public class Busca_produtos {
     //Busca produtos por categoria
     public void buscarProdutos(final Context context, final Activity activity, final View view, final int categoria, final String sexo) {
 
-        url = "http://192.168.1.229:8080";
+        url = APIconfig.URL;
         String urllocal = "/categoria/";
 
 
@@ -75,7 +75,7 @@ public class Busca_produtos {
                         Produto objetoProduto = new Produto();
                         objetoProduto.setNome(produto.getString("nome"));
                         objetoProduto.setPreco(Double.valueOf(produto.getString("preco")));
-                        objetoProduto.setQnt(produto.getLong("quantidade"));
+                        objetoProduto.setQnt(produto.getInt("quantidade"));
                         objetoProduto.setSexo(produto.getString("sexo"));
 
 
@@ -86,7 +86,6 @@ public class Busca_produtos {
                                 produtos.add(objetoProduto);
 
 
-                                System.out.println(produto.getString("quantidade"));
                             }
 
                     }

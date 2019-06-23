@@ -1,14 +1,17 @@
 package com.example.pi.views;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -27,6 +30,8 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
     private List<Produto> produtos;
     private List<Produto> listaCheiaProdutos;
     private Context context;
+    Dialog mDialog;
+
     //RequestOptions option;
 
     public ProdutoListAdapter(List<Produto> produtos, Context context) {
@@ -45,7 +50,11 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
         LayoutInflater inflater =  LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.item_list_produto,viewGroup,false);
-        ListViewHolder listViewHolder = new ListViewHolder(view);
+        final ListViewHolder listViewHolder = new ListViewHolder(view);
+
+
+
+
 
 
         return listViewHolder;
@@ -58,6 +67,9 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ListViewHolder listViewHolder, final int position) {
 
+        mDialog = new Dialog(context);
+        mDialog.setContentView(R.layout.dialog_produto);
+
        //Captura os clicks nos cardViews
         listViewHolder.itemView.setOnClickListener(
                new View.OnClickListener() {
@@ -65,26 +77,26 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
                    public void onClick(View v) {
                        Produto produto = produtos.get(position);
 
-                       System.out.println(position);
+                       final TextView  dialog_name_pro = (TextView) mDialog.findViewById(R.id.dialog_name_id);
+                       final TextView  dialog_preco_pro = (TextView) mDialog.findViewById(R.id.dialog_preco_id);
+                       //carroussel
+                       //final ImageView dialog_contact_img = (ImageView) mDialog.findViewById(R.id.dialog_img);
+                       dialog_name_pro.setText(produtos.get(listViewHolder.getAdapterPosition()).getNome());
+                       dialog_preco_pro.setText(String.valueOf(produtos.get(listViewHolder.getAdapterPosition()).getPreco()));
+                       //dialog_contact_img.setImageResource(mData.get(vholder.getAdapterPosition()).getPhoto());
+
+                       
 
 
-                      /* if ((v.findViewById(R.id.detalhe) != null) || (v.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)){
+                       ImageView btn_exit = (ImageView) mDialog.findViewById(R.id.img_x);
 
-                           ProdutoDetalheFragment fragment = ProdutoDetalheFragment.instanciaFragment(produto);
-                           FragmentManager fm =   ((AppCompatActivity) context).getSupportFragmentManager();
+                       btn_exit.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               mDialog.dismiss();
+                           }
+                       });
 
-                           FragmentTransaction ft = fm.beginTransaction();
-                           ft.replace(R.id.detalhe, fragment, ProdutoDetalheFragment.TAG_DETALHE);
-                           ft.commit();
-
-                       }else {
-
-
-                           Intent intent = new Intent(v.getContext(), ProdutoDetalheActivity.class);
-                           intent.putExtra("produto", produto);
-                           v.getContext().startActivity(intent);
-
-                       }*/
 
                    }
                }
@@ -123,6 +135,9 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
         public TextView precoProduto;
         public TextView qntProduto;
 
+        private CardView item_produto;
+
+
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,6 +146,7 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
             nomeProduto = (TextView) itemView.findViewById(R.id.nome_produto);
             precoProduto = (TextView) itemView.findViewById(R.id.preco_produto);
             qntProduto = (TextView) itemView.findViewById(R.id.qntestoque);
+            item_produto = (CardView) itemView.findViewById(R.id.produto_item_card);
         }
     }
 

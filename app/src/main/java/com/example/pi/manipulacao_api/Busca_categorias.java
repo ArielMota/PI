@@ -45,7 +45,7 @@ public class Busca_categorias {
 
     public void buscarCategorias(final Context context, final Activity activity, final View view) {
 
-        url = "http://192.168.1.229:8080";
+        url = APIconfig.URL;
         String urllocal = "/categoria";
 
 

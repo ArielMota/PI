@@ -33,7 +33,7 @@ public class Api_manipulation_authentication {
 
     public void autenticarCliente(final Context context, final Activity activity, final View view, final Cliente cli) {
 
-        url = "http://192.168.1.229:8080";
+        url = APIconfig.URL;
         String urllocal = "/cliente/autenticar";
 
 
