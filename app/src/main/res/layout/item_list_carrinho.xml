@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/produto_item_card"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/img_produto_car"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:padding="4dp"
+            android:src="@drawable/image_failed"
+            />
+
+        <TextView
+            android:id="@+id/nome_produto_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_toRightOf="@id/img_produto_car"
+            android:text="Título do produto"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nome_produto_car"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/img_produto_car"
+            android:layout_toRightOf="@+id/img_produto"
+            android:text="$"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:id="@+id/preco_produto_car"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nome_produto_car"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/img_produto_car"
+            android:layout_toRightOf="@+id/img_produto"
+            android:text="179,00"
+            android:textSize="16dp"
+            android:textColor="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/txvestoque_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nome_produto_car"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/preco_produto_car"
+            android:layout_toRightOf="@+id/img_produto_car"
+            android:text="Quantidade:"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/qnt_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nome_produto_car"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="236dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/txvestoque_car"
+            android:layout_toRightOf="@+id/img_produto_car"
+            android:text="0"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

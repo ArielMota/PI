@@ -24,17 +24,22 @@ import com.android.volley.toolbox.Volley;
 import com.example.pi.R;
 import com.example.pi.model.Categoria;
 import com.example.pi.model.Cliente;
+import com.example.pi.model.Imagem;
 import com.example.pi.model.Produto;
 import com.example.pi.views.ProdutoListAdapter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataInput;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,20 +73,35 @@ public class Busca_produtos {
                     JSONArray produtosJson = new JSONArray(response);
                     JSONObject produto;
 
+                    JsonArray id_imagens;
+                    List<Imagem> list_img = new ArrayList<>();
+
                     for (int i = 0; i < produtosJson.length(); i++) {
                         produto = new JSONObject(produtosJson.getString(i));
                         // Log.i("PESSOA ENCONTRADA: ", "id=" + produto.getString("id"));
 
                         Produto objetoProduto = new Produto();
+                        objetoProduto.setId(produto.getLong("id"));
                         objetoProduto.setNome(produto.getString("nome"));
                         objetoProduto.setPreco(Double.valueOf(produto.getString("preco")));
                         objetoProduto.setQnt(produto.getInt("quantidade"));
                         objetoProduto.setSexo(produto.getString("sexo"));
 
+                        JSONArray js = produto.getJSONArray("imagens");
 
 
+                        List<String> list = new ArrayList<String>();
+                        for (int j=0; j<js.length(); j++) {
+                            list.add(js.getJSONObject(j).getString("id"));
+                        }
 
-                            if (produto.getString("sexo").equals(sexo)) {
+                        objetoProduto.setLista_id_imagens(list);
+
+
+                        //System.out.println(objetoProduto.getLista_id_imagens().size());
+
+
+                        if (produto.getString("sexo").equals(sexo)) {
 
                                 produtos.add(objetoProduto);
 
@@ -93,7 +113,7 @@ public class Busca_produtos {
 
                 //Preenche o recyclerview com produtos
                 RecyclerView myrecyclerview = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-                ProdutoListAdapter produtoListAdapter = new ProdutoListAdapter(produtos,context);
+                ProdutoListAdapter produtoListAdapter = new ProdutoListAdapter(produtos,context,activity);
                 myrecyclerview.setLayoutManager(new LinearLayoutManager(activity));
                 //myrecyclerview.setLayoutManager(new GridLayoutManager(activity(),2));
 

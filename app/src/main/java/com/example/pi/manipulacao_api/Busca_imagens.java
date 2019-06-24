@@ -1,11 +1,15 @@
 package com.example.pi.manipulacao_api;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,11 +21,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.pi.R;
 import com.example.pi.model.Produto;
 import com.example.pi.views.ProdutoListAdapter;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +36,10 @@ public class Busca_imagens {
     String url ;
 
 
-    public void buscarImagens(final Context context, final Activity activity, final View view, final float produto_id) {
+    public void buscarImagens(final Context context, final Dialog dialog, final long produto_id) {
 
         url = APIconfig.URL;
-        String urllocal = "/imagen/";
+        String urllocal = "/imagem/";
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -44,6 +50,7 @@ public class Busca_imagens {
             public void onResponse(String response) {
                 Log.i("LOG_RESPONSE", response);
 
+                ImageView img = (ImageView) dialog.findViewById(R.id.img_produto);
 
 
 

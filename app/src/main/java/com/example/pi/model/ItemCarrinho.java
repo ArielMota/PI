@@ -4,7 +4,7 @@ public class ItemCarrinho {
 
     private Long id;
     private Produto produto;
-    private double quantidade;
+    private int quantidade;
     private Carrinho carrinho;
 
 
@@ -24,11 +24,11 @@ public class ItemCarrinho {
         this.produto = produto;
     }
 
-    public double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(double quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 

@@ -10,6 +10,15 @@ public class Produto {
     private List<Categoria> categoria;
     int qnt;
 
+    private List<String> lista_id_imagens;
+
+    public List<String> getLista_id_imagens() {
+        return lista_id_imagens;
+    }
+
+    public void setLista_id_imagens(List<String> lista_id_imagens) {
+        this.lista_id_imagens = lista_id_imagens;
+    }
 
     public Long getId() {
         return id;

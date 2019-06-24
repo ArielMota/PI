@@ -61,6 +61,7 @@ public class FragmentRoupasMasculinas extends Fragment {
                 busca_produtos.buscarProdutos(getContext(),getActivity(),view,++i,"M");
 
 
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView)

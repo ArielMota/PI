@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.pi.R;
 import com.example.pi.fragments.FragmentCadastrar;
+import com.example.pi.fragments.FragmentCarrinho;
 import com.example.pi.fragments.FragmentLogin;
 
 public class MainActivity extends AppCompatActivity {

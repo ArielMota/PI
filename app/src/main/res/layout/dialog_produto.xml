@@ -3,20 +3,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="#8888"
+    android:background="#888"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+
     >
 
 
 
 
-    
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#888"
         android:orientation="vertical"
         android:gravity="center_horizontal">
+        <ImageView
+            android:id="@+id/img_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_red_30dp"
+            android:layout_gravity="right"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,26 +38,20 @@
             android:gravity="right"
             >
 
-            <ImageView
-                android:id="@+id/img_x"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_close_red_30dp"
 
-                />
 
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_produto"
-            android:layout_width="match_parent"
-            android:layout_height="358dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/camisa"
 
-            />
-        
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            >
+        </android.support.v4.view.ViewPager>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,11 +74,63 @@
             />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            >
+
+
+            <TextView
+                android:id="@+id/qnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="right"
+            >
+
+        <ImageView
+            android:id="@+id/dialog_btn_mais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_gravity="right"
+            android:textColor="#fff"
+            android:src="@drawable/ic_mais_30dp"
+
+
+            />
+        <ImageView
+            android:id="@+id/dialog_btn_menos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_gravity="right"
+            android:textColor="#fff"
+            android:src="@drawable/ic_menos_24dp"
+
+
+            />
+
+        </LinearLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/dialog_btn_carrinho"
-            android:padding="20dp"
             android:drawablePadding="20dp"
+            android:padding="20dp"
             android:drawableLeft="@drawable/ic_local_grocery_store_black_24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,6 +144,6 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 
 </RelativeLayout>

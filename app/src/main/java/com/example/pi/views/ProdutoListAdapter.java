@@ -1,11 +1,13 @@
 package com.example.pi.views;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,8 +21,17 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pi.ImagemPagerAdapter;
 import com.example.pi.R;
+import com.example.pi.manipulacao_api.APIconfig;
+import com.example.pi.manipulacao_api.Busca_carrinho;
+import com.example.pi.manipulacao_api.Busca_imagens;
+import com.example.pi.manipulacao_api.PopulaCarrinho;
 import com.example.pi.model.Produto;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +42,16 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
     private List<Produto> listaCheiaProdutos;
     private Context context;
     Dialog mDialog;
+    Dialog mDialogCarrinho;
+    ViewPager mViewPager;
+    Activity activity;
 
     //RequestOptions option;
 
-    public ProdutoListAdapter(List<Produto> produtos, Context context) {
+    public ProdutoListAdapter(List<Produto> produtos, Context context, Activity activity) {
         this.produtos = produtos;
         this.context = context;
+        this.activity = activity;
         listaCheiaProdutos = new ArrayList<>(produtos);
         //option = new RequestOptions().centerCrop().placeholder(R.drawable.loading_shape).error(R.drawable.loading_shape);
 
@@ -67,15 +82,20 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ListViewHolder listViewHolder, final int position) {
 
+
         mDialog = new Dialog(context);
         mDialog.setContentView(R.layout.dialog_produto);
+
+        mDialogCarrinho = new Dialog(context);
+        mDialogCarrinho.setContentView(R.layout.dialog_produto);
+
 
        //Captura os clicks nos cardViews
         listViewHolder.itemView.setOnClickListener(
                new View.OnClickListener() {
                    @Override
-                   public void onClick(View v) {
-                       Produto produto = produtos.get(position);
+                   public void onClick(final View v) {
+                       final Produto produto = produtos.get(position);
 
                        final TextView  dialog_name_pro = (TextView) mDialog.findViewById(R.id.dialog_name_id);
                        final TextView  dialog_preco_pro = (TextView) mDialog.findViewById(R.id.dialog_preco_id);
@@ -85,7 +105,12 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
                        dialog_preco_pro.setText(String.valueOf(produtos.get(listViewHolder.getAdapterPosition()).getPreco()));
                        //dialog_contact_img.setImageResource(mData.get(vholder.getAdapterPosition()).getPhoto());
 
-                       
+                       mViewPager = (ViewPager) mDialog.findViewById(R.id.pager);
+
+                       ImagemPagerAdapter imagemPagerAdapter = new ImagemPagerAdapter(context,produto.getLista_id_imagens(),mDialog);
+                        mViewPager.setAdapter(imagemPagerAdapter);
+
+                       mDialog.show();
 
 
                        ImageView btn_exit = (ImageView) mDialog.findViewById(R.id.img_x);
@@ -94,6 +119,61 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
                            @Override
                            public void onClick(View view) {
                                mDialog.dismiss();
+                           }
+                       });
+
+                       final TextView quantidade = (TextView) mDialog.findViewById(R.id.qnt);
+
+
+                       ImageView btn_mais = (ImageView) mDialog.findViewById(R.id.dialog_btn_mais);
+                       btn_mais.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               quantidade.setText(String.valueOf((Integer.valueOf((String) quantidade.getText())+ 1)) );
+
+                           }
+                       });
+
+
+                       ImageView btn_menos = (ImageView) mDialog.findViewById(R.id.dialog_btn_menos);
+                       btn_menos.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               quantidade.setText(String.valueOf((Integer.valueOf((String) quantidade.getText())- 1)) );
+
+                           }
+                       });
+
+
+
+                       Button btn_adc_carrinhoo = (Button) mDialog.findViewById(R.id.dialog_btn_carrinho);
+
+                       final ImageView img = (ImageView) mDialog.findViewById(R.id.img_produto);
+
+                       btn_adc_carrinhoo.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+
+                                String token = activity.getIntent().getExtras().getString("token");
+
+
+                               Produto produto_item_carrinho = new Produto();
+                               produto_item_carrinho.setId(produto.getId());
+                               produto_item_carrinho.setQnt((Integer.valueOf((String) quantidade.getText())));
+
+
+
+                               PopulaCarrinho populaCarrinho = new PopulaCarrinho();
+                               populaCarrinho.populacarrinho(context,activity,view,produto_item_carrinho,token);
+
+
+
+
+
+
+
+
+
                            }
                        });
 
@@ -112,6 +192,10 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
 
         TextView qnt_produto =  listViewHolder.qntProduto;
         qnt_produto.setText(String.valueOf(produto.getQnt()));
+
+        ImageView imageView = (ImageView) listViewHolder.imgProduto;
+        Picasso.get().load(APIconfig.URL+"/imagem/"+produto.getLista_id_imagens().get(0)).resize(500,500)
+                .centerCrop().into(imageView);
 
 
         //ImageView imagem = listViewHolder.imgProduto;

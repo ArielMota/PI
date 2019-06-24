@@ -1,6 +1,7 @@
 package com.example.pi;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -9,22 +10,29 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.pi.manipulacao_api.APIconfig;
+import com.squareup.picasso.Picasso;
 
-public class ImagemPagerAdapter extends PagerAdapter {
+import java.util.List;
+
+
+public class  ImagemPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private int[] mResources;
+    private List<String> mImagens;
+    private Dialog dialog;
 
-    public ImagemPagerAdapter(Context context, int[] resources) {
+    public ImagemPagerAdapter(Context context, List<String> list, Dialog dialog) {
         mContext = context;
-        mResources = resources;
+        mImagens = list;
+        this.dialog = dialog;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return mResources.length;
+        return mImagens.size();
     }
 
     @Override
@@ -32,17 +40,22 @@ public class ImagemPagerAdapter extends PagerAdapter {
         return view == ((LinearLayout) object);
     }
 
-    /*@Override
+
     public Object instantiateItem(ViewGroup container, int position) {
+
+
         View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
-        imageView.setImageResource(mResources[position]);
+
+        ImageView imageView  = (ImageView) itemView.findViewById(R.id.imageView);
+
+        Picasso.get().load(APIconfig.URL+"/imagem/"+mImagens.get(position)).resize(500,500)
+             .centerCrop().into(imageView);
 
         container.addView(itemView);
 
         return itemView;
-    }*/
+    }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
