@@ -92,10 +92,6 @@ public class Busca_carrinho {
 
                     }
 
-                    System.out.println(produtos.get(1).getNome());
-                    System.out.println(lista_item.get(1).getQuantidade());
-                    System.out.println(produtos.get(1).getPreco());
-                    System.out.println(produtos.get(1).getLista_id_imagens().get(0));
 
 
 
@@ -103,7 +99,7 @@ public class Busca_carrinho {
 
                     //Preenche o recyclerview com produtos
                     RecyclerView myrecyclerview = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-                    CarrinhoListAdapter carrinhoListAdapter = new CarrinhoListAdapter(lista_item,produtos,context,activity);
+                    CarrinhoListAdapter carrinhoListAdapter = new CarrinhoListAdapter(lista_item,produtos,context,activity,view);
                     myrecyclerview.setLayoutManager(new LinearLayoutManager(activity));
 
                     myrecyclerview.setAdapter(carrinhoListAdapter);

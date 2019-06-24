@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
@@ -17,5 +17,15 @@
 
 
 
-</LinearLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="15dp"
+
+        app:srcCompat="@drawable/ic_attach_money_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    </android.support.design.widget.CoordinatorLayout>

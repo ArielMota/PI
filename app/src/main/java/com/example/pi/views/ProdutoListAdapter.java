@@ -42,7 +42,6 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
     private List<Produto> listaCheiaProdutos;
     private Context context;
     Dialog mDialog;
-    Dialog mDialogCarrinho;
     ViewPager mViewPager;
     Activity activity;
 
@@ -86,8 +85,7 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
         mDialog = new Dialog(context);
         mDialog.setContentView(R.layout.dialog_produto);
 
-        mDialogCarrinho = new Dialog(context);
-        mDialogCarrinho.setContentView(R.layout.dialog_produto);
+
 
 
        //Captura os clicks nos cardViews
@@ -169,7 +167,7 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
 
 
 
-
+                                mDialog.dismiss();
 
 
 

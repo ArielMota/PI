@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -21,6 +23,7 @@ import com.example.pi.R;
 import com.example.pi.manipulacao_api.APIconfig;
 import com.example.pi.manipulacao_api.Busca_carrinho;
 import com.example.pi.manipulacao_api.Busca_imagens;
+import com.example.pi.manipulacao_api.FinalizarCompras;
 import com.example.pi.model.ItemCarrinho;
 import com.example.pi.model.Produto;
 import com.squareup.picasso.Picasso;
@@ -35,17 +38,20 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
     List<ItemCarrinho> itemCarrinhos;
     private Context context;
     Dialog mDialog;
-    Dialog mDialogCarrinho;
     ViewPager mViewPager;
     Activity activity;
+    Double valorTotal = 0.0;
+    View viewcar;
+    String token;
 
     //RequestOptions option;
 
-    public CarrinhoListAdapter(List<ItemCarrinho> itemCarrinhos,List<Produto> produtos, Context context, Activity activity) {
+    public CarrinhoListAdapter(List<ItemCarrinho> itemCarrinhos,List<Produto> produtos, Context context, Activity activity,View viewcar) {
         this.produtos = produtos;
         this.itemCarrinhos = itemCarrinhos;
         this.context = context;
         this.activity = activity;
+        this.viewcar = viewcar;
         listaCheiaProdutos = new ArrayList<>(produtos);
         //option = new RequestOptions().centerCrop().placeholder(R.drawable.loading_shape).error(R.drawable.loading_shape);
 
@@ -55,11 +61,55 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
+        final String token = activity.getIntent().getExtras().getString("token");
+
+
         context = viewGroup.getContext();
         LayoutInflater inflater =  LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.item_list_carrinho,viewGroup,false);
         final ListViewHolder listViewHolder = new ListViewHolder(view);
+
+        mDialog = new Dialog(context);
+        mDialog.setContentView(R.layout.dialog_finalizarcompra);
+
+        FloatingActionButton fab = viewcar.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.show();
+
+                TextView textView =  mDialog.findViewById(R.id.precototal);
+
+                textView.setText(String.valueOf(valorTotal));
+
+                Button nao = (Button) mDialog.findViewById(R.id.button_nao);
+                nao.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
+
+                Button sim = (Button) mDialog.findViewById(R.id.button_sim);
+                sim.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        FinalizarCompras finalizarCompras = new FinalizarCompras();
+
+                        finalizarCompras.finalizacompra(context,activity,view,token);
+
+                        mDialog.dismiss();
+
+
+                    }
+                });
+            }
+        });
+
+
 
 
 
@@ -80,6 +130,16 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
 
         Produto produto = produtos.get(position);
         ItemCarrinho itemCarrinho = itemCarrinhos.get(position);
+
+
+        //valorTotal += produto.getPreco() * itemCarrinho.getQuantidade();
+        //System.out.println(valorTotal);
+
+        System.out.println(produto.getPreco());
+        System.out.println(itemCarrinho.getQuantidade());
+
+        valorTotal += (Double.valueOf(produto.getPreco() * itemCarrinho.getQuantidade()));
+        System.out.println(valorTotal);
 
         TextView nome_produto =  listViewHolder.nomeProduto;
         nome_produto.setText(String.valueOf(produto.getNome()));

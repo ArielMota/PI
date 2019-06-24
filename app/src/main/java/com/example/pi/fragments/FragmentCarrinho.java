@@ -3,10 +3,13 @@ package com.example.pi.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.pi.R;
@@ -22,6 +25,7 @@ public class FragmentCarrinho extends Fragment {
     EditText  email, senha;
     MyRegulerText btn_logar;
     String Token;
+    Button btnComprar;
 
 
     public FragmentCarrinho() {
@@ -49,6 +53,9 @@ public class FragmentCarrinho extends Fragment {
         Busca_carrinho busca_carrinho = new Busca_carrinho();
 
         busca_carrinho.buscacarrinho(getContext(),getActivity(),view,token);
+
+
+
 
 
 
