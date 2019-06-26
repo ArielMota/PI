@@ -23,6 +23,7 @@ import com.example.pi.R;
 import com.example.pi.manipulacao_api.APIconfig;
 import com.example.pi.manipulacao_api.Busca_carrinho;
 import com.example.pi.manipulacao_api.Busca_imagens;
+import com.example.pi.manipulacao_api.Excluir_item_carrinho;
 import com.example.pi.manipulacao_api.FinalizarCompras;
 import com.example.pi.model.ItemCarrinho;
 import com.example.pi.model.Produto;
@@ -61,7 +62,7 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        final String token = activity.getIntent().getExtras().getString("token");
+        token = activity.getIntent().getExtras().getString("token");
 
 
         context = viewGroup.getContext();
@@ -106,6 +107,8 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
 
                     }
                 });
+
+
             }
         });
 
@@ -128,8 +131,8 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
 
 
 
-        Produto produto = produtos.get(position);
-        ItemCarrinho itemCarrinho = itemCarrinhos.get(position);
+        final Produto produto = produtos.get(position);
+        final ItemCarrinho itemCarrinho = itemCarrinhos.get(position);
 
 
         //valorTotal += produto.getPreco() * itemCarrinho.getQuantidade();
@@ -155,6 +158,20 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
                 .centerCrop().into(imageView);
 
 
+        listViewHolder.img_x.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemCarrinhos.remove(position);
+                produtos.remove(position);
+                notifyItemRemoved(position);
+
+                Excluir_item_carrinho excluir_item_carrinho = new Excluir_item_carrinho();
+                excluir_item_carrinho.excluirItemCarrinho(context,produto.getId(),token);
+
+            }
+        });
+
+
         //ImageView imagem = listViewHolder.imgProduto;
         //Resources res = context.getResources();
         //imagem.setImageResource(produtos.get(position).getImg());
@@ -175,6 +192,7 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
         public TextView nomeProduto;
         public TextView precoProduto;
         public TextView qntProduto;
+        public ImageView img_x;
 
         private CardView item_produto;
 
@@ -188,6 +206,8 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
             precoProduto = (TextView) itemView.findViewById(R.id.preco_produto_car);
             qntProduto = (TextView) itemView.findViewById(R.id.qnt_car);
             item_produto = (CardView) itemView.findViewById(R.id.produto_item_card);
+            img_x = (ImageView) itemView.findViewById(R.id.img_x);
+
         }
     }
 

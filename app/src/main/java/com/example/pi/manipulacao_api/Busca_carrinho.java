@@ -77,6 +77,8 @@ public class Busca_carrinho {
 
                         JSONObject produto_json = new JSONObject(itens.getJSONObject(i).getString("produto"));
 
+                        //Esse id será utilizado para exclusão do item no carrinho
+                        produto.setId(Long.valueOf(produto_json.getString("id")));
                         produto.setNome(produto_json.getString("nome"));
                         produto.setPreco(Double.valueOf(produto_json.getString("preco")));
 
