@@ -3,8 +3,6 @@ package com.example.pi.views;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 
 import android.support.v4.view.ViewPager;
@@ -17,21 +15,14 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pi.ImagemPagerAdapter;
 import com.example.pi.R;
 import com.example.pi.manipulacao_api.APIconfig;
-import com.example.pi.manipulacao_api.Busca_carrinho;
-import com.example.pi.manipulacao_api.Busca_imagens;
 import com.example.pi.manipulacao_api.PopulaCarrinho;
 import com.example.pi.model.Produto;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +54,7 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
         context = viewGroup.getContext();
         LayoutInflater inflater =  LayoutInflater.from(context);
 
-        View view = inflater.inflate(R.layout.item_list_produto,viewGroup,false);
+        View view = inflater.inflate(R.layout.item_list_produto_gridlayout,viewGroup,false);
         final ListViewHolder listViewHolder = new ListViewHolder(view);
 
 

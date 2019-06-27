@@ -3,25 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#8888">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#8888">
+        android:gravity="center"
+        android:background="#cc0000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:background="#fff">
     <Spinner
 
         android:id="@+id/menu_categorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
 
         />
+    </LinearLayout>
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"

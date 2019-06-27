@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="220dp"
+    android:id="@+id/produto_item_card"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_gravity="center_horizontal">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_produto"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:padding="4dp"
+            android:src="@drawable/camisa"
+
+            />
+        <TextView
+            android:id="@+id/nome_produto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Título do produto"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="#000000" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="2dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$ "
+                        android:textSize="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/preco_produto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="179,00"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorAccent"
+                        />
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="2dp"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nome_produto"
+                        android:layout_toEndOf="@+id/img_produto"
+                        android:layout_toRightOf="@+id/img_produto"
+                        android:text="Estoque: "
+                        android:textSize="16dp" />
+
+
+                    <TextView
+                        android:id="@+id/qntestoque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textSize="16dp"
+                       />
+
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

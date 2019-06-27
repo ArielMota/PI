@@ -49,6 +49,8 @@ public class FragmentRoupasMasculinas extends Fragment {
         Busca_categorias busca_categorias = new Busca_categorias();
         busca_categorias.buscarCategorias(getContext(), getActivity(), view);
 
+        
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {

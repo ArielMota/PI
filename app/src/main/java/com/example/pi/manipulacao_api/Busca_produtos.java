@@ -2,6 +2,7 @@ package com.example.pi.manipulacao_api;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -114,8 +115,8 @@ public class Busca_produtos {
                 //Preenche o recyclerview com produtos
                 RecyclerView myrecyclerview = (RecyclerView) view.findViewById(R.id.my_recycler_view);
                 ProdutoListAdapter produtoListAdapter = new ProdutoListAdapter(produtos,context,activity);
-                myrecyclerview.setLayoutManager(new LinearLayoutManager(activity));
-                //myrecyclerview.setLayoutManager(new GridLayoutManager(activity(),2));
+                //myrecyclerview.setLayoutManager(new LinearLayoutManager(activity));
+                myrecyclerview.setLayoutManager(new GridLayoutManager(activity,2));
 
                 myrecyclerview.setAdapter(produtoListAdapter);
                 } catch (JSONException e) {
